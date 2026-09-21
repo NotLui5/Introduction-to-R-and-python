@@ -27,8 +27,8 @@ glimpse(birthwt)
 # about "tidy" categorical data before plotting.
 birthwt <- birthwt %>%
   mutate(
-    smoke_f = factor(smoke, labels = c("Non-smoker", "Smoker")),
-    race_f  = factor(race,  labels = c("White", "Black", "Other")),
+    smoke_f = factor(x = smoke, labels = c("Non-smoker", "Smoker")),
+    race_f  = factor(race, levels =c(1,2,3), c("White", "Black", "Other")),
     ht_f    = factor(ht,    labels = c("No hypertension", "Hypertension"))
   )
 
@@ -81,47 +81,26 @@ ggplot(data = birthwt, mapping = aes(x = age, y = bwt, color = smoke_f)) +
 ## ------------------------------------------------------------
 
 # --- Bug 1 -----------------------
-# ggplot(data = birthwt, aes(x = age, y = bwt))
-# + geom_point()
+ggplot(data = birthwt, aes(x = age, y = bwt)) +
+ geom_point()
 
 # --- Bug 2 ------------------------
-# ggplot(birthwt, aes(x = age, y = bwt) +
-#   geom_point()
+ggplot(birthwt, aes(x = age, y = bwt)) +
+  geom_point()
 
 # --- Bug 3 ---------------------
-# ggplot(birthwt, x = age, y = bwt) +
-#   geom_point()
+ggplot(birthwt, aes(x = age, y = bwt)) +
+  geom_point()
 
 
 # --- Bug 4 --------------------------
-# ggplot(birthwt, aes(x = smoke_f, y = bwt)) +
-#   geom_boxplot() +
-#   labs(title = "Birth weight by smoking status)
-
-## ------------------------------------------------------------
-## STEP 4 - Independent practice
-## ------------------------------------------------------------
-
-## >>> TRY A: Make a boxplot of `bwt` by `smoke_f`.
-##            Describe the relationship in one sentence.
-
-## >>> TRY B: Make a bar chart of `race_f`. Which race category is
-##            most common in this dataset?
-
-## >>> TRY C: Make a histogram of `age`. Try binwidth = 1, then 5,
-##            then 10. Which one best shows the shape of the
-##            distribution?
-
-## >>> TRY D (stretch): Facet the Step 2 scatterplot by `ht_f`
-##            (hypertension status) using facet_wrap(~ht_f).
-##            Does the age/birth-weight relationship look different
-##            for mothers with hypertension?
-
-# Space to write/live-code participant answers below:
+ggplot(birthwt, aes(x = smoke_f, y = bwt)) +
+  geom_boxplot() +
+  labs(title = "Birth weight by smoking status")
 
 
 ## ------------------------------------------------------------
-## STEP 5 - Debrief
+## STEP 4 - Debrief
 ## ------------------------------------------------------------
 ## Discuss as a group:
 ## - Which error message was the most confusing? Why?

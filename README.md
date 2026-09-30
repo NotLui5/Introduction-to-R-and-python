@@ -11,8 +11,8 @@ analysis, through R and python.
 | Class 🔣 | Issue 🔎 | State 📌 | Date 📆 |
 |:---|:---|:---|:---|
 | 1st clase | Introduction to R (Chapter 1 of both main material) | 🌳 Done | 21/09/2026 |
-| 2nd clase | Workflow: basics. Simple manipulations | 🌱 Planned | 28/09/2026 |
-| 3rd clase | Data transformation. Objects | 🌱 Planned | 05/10/2025 |
+| 2nd clase | Workflow: basics + Data transformation. Simple manipulations | 🌳 Done | 30/09/2026 |
+| 3rd clase | Workflow: code style. Objects. Correlation | 🌱 Planned | 05/10/2025 |
 
 Other status: ❌ Postponed
 
@@ -26,3 +26,5 @@ Main material:
 Others:
 
 - [Pivoting](https://tidyr.tidyverse.org/articles/pivot.html)
+
+- [Correlation](https://library.virginia.edu/data/articles/correlation-pearson-spearman-and-kendalls-tau)

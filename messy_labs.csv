@@ -1,0 +1,11 @@
+Patient ID,Age,WBC Count,Result Flag
+001,45,7.2,normal
+002,,11.4,high
+003,63,.,pending
+004,29,6.8,normal
+005,71,.,.
+006,38,9.1,normal
+007,55,14.9,high
+008,,5.5,low
+009,67,8.0,normal
+010,52,.,pending

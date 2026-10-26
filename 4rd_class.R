@@ -18,7 +18,14 @@ library(janitor)
 ## ------------------------------------------------------------
 
 # --- Chapter 4: code style - BEFORE -----------------------------
-covidtesting%>%filter(result=="positive")%>%group_by(clinic_name)%>%summarize(n=n(),avgtat=mean(col_rec_tat,na.rm=TRUE))
+covid_testing %>% 
+  filter(result == "positive") %>%
+  group_by(clinic_name) %>%
+  summarize(
+    n      = n(), 
+    avgtat = mean(col_rec_tat, na.rm = TRUE)
+    # avgtat = sum(col_rect_tat,na.rm=TRUE)
+    )
 
 ## >>> TRY: What's hard to read in the line above? List 3 problems
 ##          before looking at the fixed version.
@@ -41,12 +48,6 @@ covidtesting%>%filter(result=="positive")%>%group_by(clinic_name)%>%summarize(n=
 ## ------------------------------------------------------------
 
 # The 3 rules of tidy data:
-
-
-
-
-
-
 #  1. Each variable is a column
 #  2. Each observation is a row
 #  3. Each value is a cell
@@ -61,8 +62,9 @@ wide_vitals
 ##          a patient, or a patient-visit? Is this data tidy by the
 ##          3 rules above?
 
+
 # ---------------- ANSWER ----------------------------------------
-# rule:
+# rule: 1
 # ------------------------------------------------------------------
 
 ## ------------------------------------------------------------
@@ -87,11 +89,14 @@ vitals_long
 # ---------------- ANSWER ----------------------------------------
 vitals_tidy <- wide_vitals |>
   pivot_longer(
-    cols = starts_with("visit"),
-    names_to = c("visit", "measure"),
+    # cols = starts_with("visit"),
+    cols = c("visit1_sbp", "visit1_dbp"),
+    # names_to = "visit",
     names_sep = "_",
+    names_to = c("visit", "measure"),
     values_to = "value"
-  )
+  ) #|> 
+  # mutate(visit = parse_number(visit))s
 vitals_tidy
 
 # Now each row is one patient-visit-measurement - truly tidy. Notice
@@ -105,7 +110,7 @@ vitals_tidy
 
 # ---------------- ANSWER ----------------------------------------
 vitals_tidy |>
-  ggplot(aes(x = visit, y = value, fill = visit)) +
+  ggplot(aes(x = n, y = value)) +
   geom_boxplot() +
   facet_wrap(~measure, scales = "free_y") +
   labs(title = "Blood pressure across visits") +
@@ -138,7 +143,7 @@ vitals_summary
 
 # Read the messy lab export AS-IS first, and look at the column
 # specification message readr prints.
-messy_labs_raw <- read_csv("messy_labs.csv")
+messy_labs_raw <- read_csv("messy_labs.csv", na = c("NA", "na", "NaN",  ""))
 messy_labs_raw
 
 ## >>> TRY: Look at the printed column types. What went wrong with
